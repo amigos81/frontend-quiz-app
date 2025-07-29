@@ -16,8 +16,8 @@ Construido con:
 
 Servidor alojado:
 
-- URL alojado GIT: []()
-- URL del sitio: []()
+- URL alojado GIT: [https://github.com/amigos81/frontend-quiz-app](https://github.com/amigos81/frontend-quiz-app)
+- URL del sitio: [https://super-liger-968110.netlify.app/](https://super-liger-968110.netlify.app/)
 
 ## Autor
 
