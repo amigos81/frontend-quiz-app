@@ -1,21 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   localStorage.setItem("themeState", false);
 
   const switchInput = document.getElementById("switch-input");
   const question = document.getElementById("question");
   const quizContent = document.getElementById("quiz-content");
 
-
   switchInput.addEventListener("change", () => {
     localStorage.setItem("themeState", switchInput.checked);
     toggleTheme();
   });
 
-
   function toggleTheme() {
-
-    console.log(localStorage.getItem("themeState") );
+    console.log(localStorage.getItem("themeState"));
 
     if (localStorage.getItem("themeState") === "true") {
       document.body.classList.add("dark");
@@ -50,24 +46,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let quizzesColor = null;
   async function getDataInitial() {
-    
-    await fetch("data.json")
-      .then((response) => response.json())
-      .then((data) => {
-        let html = "";
-        data.quizzes.forEach((valor) => {
-          html += `<li class="quiz-item">
+    try {
+      const response = await fetch("data.json");
+      const data = await response.json();
+      let html = "";
+      data.quizzes.forEach((valor) => {
+        html += `<li class="quiz-item">
                 <div class="icon-svg">
                   <img src="${valor.icon}" alt="" width="24px" height="24px">
                 </div>
                 ${valor.title}
               </li>`;
-        });
+      });
 
-        const card = document.createElement("div");
-        card.id = "cardQuizContent";
-        card.classList.add("cadQuizContent");
-        card.innerHTML += `
+      const card = document.createElement("div");
+      card.id = "cardQuizContent";
+      card.classList.add("cadQuizContent");
+      card.innerHTML += `
             <div class="title">
               <h1>Welcome to the <br><strong>Frontend Quiz!</strong></h1>
               <span class="subtitle">Pick a subject to get started.</span>
@@ -77,11 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
             </ul>
           `;
 
-        quizContent.appendChild(card);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los datos:", error);
-      });
+      quizContent.appendChild(card);
+    } catch (error) {
+      console.error("Error al obtener los datos:", error);
+    }
 
     document.querySelector(".quiz-items").addEventListener("click", (e) => {
       if (e.target && e.target.matches(".quiz-item")) {
@@ -111,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let filteredData = null;
 
   async function getDataQuestion(textContent = "") {
-    // toggleTheme() 
+    // toggleTheme()
     try {
       const response = await fetch("data.json");
       const data = await response.json();
@@ -316,7 +310,6 @@ document.addEventListener("DOMContentLoaded", () => {
       countQuestions = 0;
       correctQuestion = 0;
       getDataInitial();
-      
     });
     toggleTheme();
   }
